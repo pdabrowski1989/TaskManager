@@ -1,0 +1,25 @@
+{
+  "name": "task_manager",
+  "description": "Simple task manager",
+  "main": "index.js",
+  "authors": [
+    "Dabrowski Pawel"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "^2.2.4",
+    "angular": "^1.5.8",
+    "less": "^2.7.1",
+    "angular-ui-router": "ui-router#^0.3.1",
+    "bootstrap": "^3.3.7"
+  }
+}
