@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //========== Connect to db.
-mongoose.connect('mongodb://localhost/mydb');
+mongoose.connect('mongodb://localhost/testdb');
 /*mongoose.connect('mongodb://mo1008_taskM:9Mzc64EfBzs5diwSBR5a@85.194.242.107:27017/mo1008_taskM');*/
 db.on('error', function () {
     console.log('Connection Error.')
@@ -36,24 +36,28 @@ app.use('/css', express.static(projectPath + 'www/css'));
 //========== Routes
 router.get('/users', function (req, res) {
     User.find(function(err, users) {
-        if (err)
-            res.send(err);
-
+        if (err) res.send(err);
         res.json(users);
+    });
+});
+
+router.get('/users/:username', function (req, res) {
+    User.findOne({username: req.params.username}, function (err, user) {
+        if (err) res.send(err);
+        res.json(user);
     });
 });
 
 router.post('/users', function (req, res) {
     User.create({
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        email: req.body.email
     }, function (err, user) {
         if(err) console.log(err);
 
         User.find(function (err, users) {
-            if (err)
-                res.send(err);
-
+            if (err) res.send(err);
             res.json(users);
         })
     })

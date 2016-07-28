@@ -59,7 +59,7 @@ angular.module('TaskManager').controller('DashboardCtrl', DashboardCtrl);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var LogInCtrl = function LogInCtrl() {
+var LogInCtrl = function LogInCtrl(LogInService) {
     _classCallCheck(this, LogInCtrl);
 
     var lCtrl = this;
@@ -72,8 +72,10 @@ angular.module('TaskManager').controller('LogInCtrl', LogInCtrl);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var LogInService = function LogInService() {
+var LogInService = function LogInService($http) {
     _classCallCheck(this, LogInService);
+
+    var lService = this;
 };
 
 angular.module('TaskManager').service('LogInService', LogInService);
@@ -113,12 +115,54 @@ angular.module('TaskManager').service('LogInService', LogInService);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var SignInCtrl = function SignInCtrl() {
+var SignInCtrl = function SignInCtrl(SignInService) {
     _classCallCheck(this, SignInCtrl);
+
+    var sCtrl = this;
+    sCtrl.createUser = createUser;
+    /////
+
+    function createUser() {
+        sCtrl.user = {
+            username: sCtrl.username,
+            password: sCtrl.password,
+            email: sCtrl.email
+        };
+
+        SignInService.createUser(sCtrl.user);
+    }
 };
 
 angular.module('TaskManager').controller('SignInCtrl', SignInCtrl);
-/**
- * Created by p.dabrowski5 on 2016-07-28.
- */
-"use strict";
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var SignInService = function SignInService($http) {
+    _classCallCheck(this, SignInService);
+
+    var sService = this;
+    sService.createUser = createUser;
+    sService.checkIfUsernameIsTaken = checkIfUsernameIsTaken;
+
+    //////
+
+    function checkIfUsernameIsTaken(username) {
+        $http.get('/api/users/' + username).then(function (res) {
+            console.log(res.data);
+            return res.data;
+        });
+    }
+
+    function createUser(user) {
+        console.log(user);
+
+        sService.checkIfUsernameIsTaken(user.username);
+
+        $http.post('/api/users', user).then(function (res) {
+            return res.data;
+        });
+    }
+};
+
+angular.module('TaskManager').service('SignInService', SignInService);
