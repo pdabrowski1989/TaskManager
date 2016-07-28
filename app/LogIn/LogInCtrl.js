@@ -1,7 +1,12 @@
 'use strict';
 
 class LogInCtrl {
-    constructor() {
+    constructor(LogInService) {
+        var lCtrl = this;
+        lCtrl.displayAlert = true;
+        lCtrl.alertType = {};
+
+        lCtrl.checkIfUsernameIsTaken = LogInService.checkIfUsernameIsTaken;
     }
 }
 

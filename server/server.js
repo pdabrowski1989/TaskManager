@@ -12,6 +12,7 @@ var projectPath = path.join(__dirname, '../');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//========== Connect to db.
 mongoose.connect('mongodb://localhost/mydb');
 /*mongoose.connect('mongodb://mo1008_taskM:9Mzc64EfBzs5diwSBR5a@85.194.242.107:27017/mo1008_taskM');*/
 db.on('error', function () {
@@ -30,8 +31,9 @@ app.get('/', function (req, res) {
 app.use('/app', express.static(projectPath + 'app'));
 app.use('/libs', express.static(projectPath + 'www/libs'));
 app.use('/js', express.static(projectPath + 'www/js'));
-app.use('/less', express.static(projectPath + 'less'));
+app.use('/css', express.static(projectPath + 'www/css'));
 
+//========== Routes
 router.get('/users', function (req, res) {
     User.find(function(err, users) {
         if (err)
@@ -57,6 +59,7 @@ router.post('/users', function (req, res) {
     })
 });
 
+//========== Init
 app.use('/api', router);
 app.listen(port);
 console.log('Listening on port: ' + port + '.');

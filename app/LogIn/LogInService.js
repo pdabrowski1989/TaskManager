@@ -1,8 +1,15 @@
 'use strict';
 
 class LogInService {
-    constructor() {
-        
+    constructor($http) {
+        var lService = this;
+        lService.checkIfUsernameIsTaken = checkIfUsernameIsTaken;
+
+        //////
+
+        function checkIfUsernameIsTaken(username) {
+           console.log(username);
+        }
     }
 }
 

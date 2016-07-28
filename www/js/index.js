@@ -3,33 +3,37 @@
 angular.module('TaskManager', ['ui.router']);
 'use strict';
 
-class DashboardCtrl {
-    constructor($http) {
-        let dCtrl = this;
-        dCtrl.a = a;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-        dCtrl.user = {};
+var DashboardCtrl = function DashboardCtrl($http) {
+    _classCallCheck(this, DashboardCtrl);
 
-        $http.get('/api/users').then(function (res) {
+    var dCtrl = this;
+    dCtrl.a = a;
+
+    dCtrl.user = {};
+
+    $http.get('/api/users').then(function (res) {
+        dCtrl.users = res.data;
+        console.log(dCtrl.users);
+    });
+
+    function a() {
+        dCtrl.user = {
+            username: dCtrl.username,
+            password: dCtrl.password
+        };
+
+        $http.post('/api/users', dCtrl.user).then(function (res) {
             dCtrl.users = res.data;
             console.log(dCtrl.users);
         });
-
-        function a() {
-            dCtrl.user = {
-                username: dCtrl.username,
-                password: dCtrl.password
-            };
-
-            $http.post('/api/users', dCtrl.user).then(function (res) {
-                dCtrl.users = res.data;
-                console.log(dCtrl.users);
-            });
-        }
     }
-}
+};
 
 angular.module('TaskManager').controller('DashboardCtrl', DashboardCtrl);
+'use strict';
+
 (function () {
     'use strict';
 
@@ -51,29 +55,30 @@ angular.module('TaskManager').controller('DashboardCtrl', DashboardCtrl);
         });
     }
 })();
-/**
- * Created by p.dabrowski5 on 2016-07-28.
- */
-/**
- * Created by p.dabrowski5 on 2016-07-28.
- */
-/**
- * Created by p.dabrowski5 on 2016-07-28.
- */
 'use strict';
 
-class LogInCtrl {
-    constructor() {}
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LogInCtrl = function LogInCtrl() {
+    _classCallCheck(this, LogInCtrl);
+
+    var lCtrl = this;
+    lCtrl.displayAlert = true;
+    lCtrl.alertType = {};
+};
 
 angular.module('TaskManager').controller('LogInCtrl', LogInCtrl);
 'use strict';
 
-class LogInService {
-    constructor() {}
-}
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var LogInService = function LogInService() {
+    _classCallCheck(this, LogInService);
+};
 
 angular.module('TaskManager').service('LogInService', LogInService);
+'use strict';
+
 (function () {
     'use strict';
 
@@ -88,3 +93,32 @@ angular.module('TaskManager').service('LogInService', LogInService);
         });
     }
 })();
+'use strict';
+
+(function () {
+    'use strict';
+
+    angular.module('TaskManager').config(SignInConfig);
+
+    function SignInConfig($stateProvider) {
+        $stateProvider.state('signIn', {
+            url: '/signIn',
+            controller: 'SignInCtrl',
+            controllerAs: 'sCtrl',
+            templateUrl: '../app/SignIn/signin.html'
+        });
+    }
+})();
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var SignInCtrl = function SignInCtrl() {
+    _classCallCheck(this, SignInCtrl);
+};
+
+angular.module('TaskManager').controller('SignInCtrl', SignInCtrl);
+/**
+ * Created by p.dabrowski5 on 2016-07-28.
+ */
+"use strict";

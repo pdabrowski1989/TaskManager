@@ -1,0 +1,16 @@
+body {
+  background: #f7f7f7;
+}
+.portlet {
+  border: solid 1px #ddd;
+}
+.portlet-container {
+  padding: 20px;
+  background: #fff;
+}
+.center-fb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
