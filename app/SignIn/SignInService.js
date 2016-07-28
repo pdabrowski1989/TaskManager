@@ -5,24 +5,31 @@ class SignInService {
         var sService = this;
         sService.createUser = createUser;
         sService.checkIfUsernameIsTaken = checkIfUsernameIsTaken;
+        sService.isTaken = false;
 
         //////
 
         function checkIfUsernameIsTaken(username) {
             $http.get('/api/users/' + username).then(function (res) {
-                console.log(res.data);
-               return res.data;
+                if (res.data !== null) {
+                    console.log('is taken')
+                    return sService.isTaken = true;
+                } else {
+                    return sService.isTaken = false;
+                }
             });
         }
 
         function createUser (user) {
-            console.log(user);
-
             sService.checkIfUsernameIsTaken(user.username);
 
-            $http.post('/api/users', user).then(function (res) {
-                return res.data;
-            })
+           if(sService.isTaken === false) {
+               console.log(user)
+
+               $http.post('/api/users', user).then(function (res) {
+                  console.log(res.data)
+               })
+           }
         }
     }
 }
