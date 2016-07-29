@@ -1,8 +1,9 @@
 'use strict';
 
 class SignInService {
-    constructor($http) {
+    constructor($http, $q, $rootScope) {
         var sService = this;
+        var deferred = $q.defer();
         sService.createUser = createUser;
         sService.checkIfUsernameIsTaken = checkIfUsernameIsTaken;
         sService.isTaken = false;
@@ -11,25 +12,31 @@ class SignInService {
 
         function checkIfUsernameIsTaken(username) {
             $http.get('/api/users/' + username).then(function (res) {
-                if (res.data !== null) {
-                    console.log('is taken')
-                    return sService.isTaken = true;
+                if (res.data) {
+                    $rootScope.$apply(function () {
+                        sService.isTaken = true;
+                    });
                 } else {
-                    return sService.isTaken = false;
+                    sService.isTaken = false;
                 }
+
+               deferred.resolve(sService.isTaken);
             });
+
+            return deferred.promise;
         }
 
-        function createUser (user) {
-            sService.checkIfUsernameIsTaken(user.username);
+        function createUser(user) {
+            sService.checkIfUsernameIsTaken(user.username).then(function () {
+                console.log(sService.isTaken);
 
-           if(sService.isTaken === false) {
-               console.log(user)
+                if (sService.isTaken === false) {
 
-               $http.post('/api/users', user).then(function (res) {
-                  console.log(res.data)
-               })
-           }
+                    $http.post('/api/users', user).then(function (res) {
+                        console.log(res.data)
+                    })
+                }
+            });
         }
     }
 }
