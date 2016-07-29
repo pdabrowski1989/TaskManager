@@ -1,6 +1,7 @@
 var gulp = require("gulp");
 var babel = require("gulp-babel");
 var concat = require("gulp-concat");
+var uglify = require("gulp-uglify");
 var less = require('gulp-less');
 
 gulp.task('less', function () {
@@ -13,6 +14,10 @@ gulp.task('less', function () {
 gulp.task('build', ['less'], function () {
     return gulp.src('app/**/*.js')
         .pipe(babel())
+        .pipe(uglify({
+            mangle: false,
+            outSourceMap: true
+        }))
         .pipe(concat('index.js'))
         .pipe(gulp.dest('www/js/'));
 });
