@@ -1,12 +1,17 @@
 'use strict';
 
-class LogInService {
+export default class LogInService {
     constructor($http) {
-        var lService = this;
+        this.$http = $http;
     }
+
+    getUserData(user){
+        console.log(user, typeof user);
+
+        return this.$http.get('api/users/' + user);
+    }
+
 }
 
-angular
-    .module('TaskManager')
-    .service('LogInService', LogInService);
+LogInService.$inject = ['$http'];
 

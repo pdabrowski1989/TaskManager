@@ -1,6 +1,6 @@
 'use strict';
 
-class SignInService {
+export default class SignInService {
     constructor($http, $q, $rootScope) {
         var sService = this;
         var deferred = $q.defer();
@@ -40,8 +40,3 @@ class SignInService {
         }
     }
 }
-
-angular
-    .module('TaskManager')
-    .service('SignInService', SignInService);
-

@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //========== Connect to db.
-mongoose.connect('mongodb://localhost/testdb2');
+mongoose.connect('mongodb://localhost/test8');
 /*mongoose.connect('mongodb://mo1008_taskM:9Mzc64EfBzs5diwSBR5a@85.194.242.107:27017/mo1008_taskM');*/
 db.on('error', function () {
     console.log('Connection Error.')

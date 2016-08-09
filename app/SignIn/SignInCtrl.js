@@ -1,6 +1,6 @@
 'use strict';
 
-class SignInCtrl {
+export default class SignInCtrl {
     constructor(SignInService) {
         var sCtrl = this;
         sCtrl.createUser = createUser;
@@ -17,8 +17,3 @@ class SignInCtrl {
         }
     }
 }
-
-angular
-    .module('TaskManager')
-    .controller('SignInCtrl', SignInCtrl);
-

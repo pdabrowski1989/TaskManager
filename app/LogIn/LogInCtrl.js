@@ -1,14 +1,21 @@
 'use strict';
 
-class LogInCtrl {
-    constructor(LogInService) {
-        var lCtrl = this;
-        lCtrl.displayAlert = true;
-        lCtrl.alertType = {};
+export default class LogInCtrl {
+    constructor(LogInService, $http) {
+        this.$http = $http;
+        this.getUserData = LogInService.getUserData;
     }
+
+    getUser() {
+        return this.getUserData(this.username).then((response) => {
+            if(typeof response.data.username !== 'undefined' && this.password === response.data.password) {
+
+            }
+
+            console.log(response.data.password, response.data.username);
+        });
+    }
+
 }
 
-angular
-    .module('TaskManager')
-    .controller('LogInCtrl', LogInCtrl);
-
+LogInCtrl.$inject = ['LogInService', '$http'];

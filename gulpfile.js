@@ -1,8 +1,7 @@
 var gulp = require("gulp");
-var babel = require("gulp-babel");
 var concat = require("gulp-concat");
-var uglify = require("gulp-uglify");
 var less = require('gulp-less');
+var webpack = require('webpack-stream');
 
 gulp.task('less', function () {
     return gulp.src('less/index.less')
@@ -11,13 +10,23 @@ gulp.task('less', function () {
         .pipe(gulp.dest('www/css/'));
 });
 
-gulp.task('build', ['less'], function () {
+gulp.task('webpack', ['less'], function () {
     return gulp.src('app/**/*.js')
-        .pipe(babel())
-        .pipe(uglify({
-            mangle: false,
-            outSourceMap: true
+        .pipe(webpack({
+            devtool: 'source-map',
+            output: {
+                filename: 'index.js'
+            },
+            module: {
+                loaders: [{
+                    loader: 'babel',
+                    query: {
+                        presets: ['es2015']
+                    }
+                }]
+            }
         }))
-        .pipe(concat('index.js'))
         .pipe(gulp.dest('www/js/'));
 });
+
+gulp.task('build', ['less', 'webpack']);
