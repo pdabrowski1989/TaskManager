@@ -50,6 +50,7 @@
 	__webpack_require__(6);
 	__webpack_require__(4);
 	__webpack_require__(2);
+	__webpack_require__(10);
 	__webpack_require__(3);
 	__webpack_require__(7);
 	module.exports = __webpack_require__(5);
@@ -237,7 +238,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var LogInCtrl = function () {
-	    function LogInCtrl(LogInService, $http) {
+	    function LogInCtrl($http, $rootScope, LogInService) {
 	        _classCallCheck(this, LogInCtrl);
 	
 	        this.$http = $http;
@@ -247,7 +248,13 @@
 	    _createClass(LogInCtrl, [{
 	        key: 'getUser',
 	        value: function getUser() {
+	            var _this = this;
+	
 	            return this.getUserData(this.username).then(function (response) {
+	                if (typeof response.data.username !== 'undefined' && _this.password === response.data.password) {
+	                    $rootScope.$emit('isLoged');
+	                }
+	
 	                console.log(response.data.password, response.data.username);
 	            });
 	        }
@@ -259,7 +266,7 @@
 	exports.default = LogInCtrl;
 	
 	
-	LogInCtrl.$inject = ['LogInService', '$http'];
+	LogInCtrl.$inject = ['$http', '$rootScope', 'LogInService'];
 
 /***/ },
 /* 7 */
@@ -356,6 +363,26 @@
 	        });
 	    }
 	})();
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var MainCtrl = function MainCtrl() {
+	    _classCallCheck(this, MainCtrl);
+	
+	    var mCtrl = this;
+	};
+	
+	exports.default = MainCtrl;
 
 /***/ }
 /******/ ]);

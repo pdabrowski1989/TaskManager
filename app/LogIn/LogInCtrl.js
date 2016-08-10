@@ -1,7 +1,7 @@
 'use strict';
 
 export default class LogInCtrl {
-    constructor(LogInService, $http) {
+    constructor($http, $rootScope, LogInService) {
         this.$http = $http;
         this.getUserData = LogInService.getUserData;
     }
@@ -9,7 +9,7 @@ export default class LogInCtrl {
     getUser() {
         return this.getUserData(this.username).then((response) => {
             if(typeof response.data.username !== 'undefined' && this.password === response.data.password) {
-
+                $rootScope.$emit('isLoged')
             }
 
             console.log(response.data.password, response.data.username);
@@ -18,4 +18,4 @@ export default class LogInCtrl {
 
 }
 
-LogInCtrl.$inject = ['LogInService', '$http'];
+LogInCtrl.$inject = ['$http', '$rootScope', 'LogInService'];
