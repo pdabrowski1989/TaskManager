@@ -5,9 +5,9 @@
         .module('TaskManager')
         .config(DashboardConfig);
 
-    function DashboardConfig ($stateProvider, $urlRouterProvider) {
+    function DashboardConfig($stateProvider, $urlRouterProvider) {
 
-        if(true) {
+        if (true) {
             $urlRouterProvider.otherwise('/logIn');
         } else {
             $urlRouterProvider.otherwise('/dashboard');
@@ -19,6 +19,13 @@
                 controller: 'DashboardCtrl',
                 controllerAs: 'dCtrl',
                 templateUrl: '../app/Dashboard/dashboard.html'
+            })
+
+            .state('dashboard.createTask', {
+                url: '/createtask',
+                controller: 'CreateTaskCtrl',
+                controllerAs: 'ctCtrl',
+                templateUrl: '../app/Dashboard/createTask/createTask.html'
             })
 
     }

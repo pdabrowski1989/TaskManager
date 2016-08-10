@@ -1,11 +1,14 @@
-<form>
-   <label>
-       user:
-       <input ng-model="dCtrl.username">
-   </label>
-    <label>
-        password:
-        <input ng-model="dCtrl.password">
-    </label>
-    <button ng-click="dCtrl.a()">Add</button>
-</form>
+<div ui-view>
+    <button ui-sref="dashboard.createTask" class="btn btn-success">Create task</button>
+
+    <table>
+        <tr>
+            <th></th>
+        </tr>
+        <tbody>
+        <tr ng-repeat="task in dCtrl.tasks">
+
+        </tr>
+        </tbody>
+    </table>
+</div>

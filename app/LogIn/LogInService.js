@@ -6,8 +6,6 @@ export default class LogInService {
     }
 
     getUserData(user){
-        console.log(user, typeof user);
-
         return this.$http.get('api/users/' + user);
     }
 

@@ -1,32 +1,14 @@
 'use strict';
 
-class DashboardCtrl {
-    constructor($http) {
-        let dCtrl = this;
-        dCtrl.a = a;
+export default class DashboardCtrl {
+    constructor($http, DashboardService) {
+        this.$http = $http;
+        this.getTasksData =  DashboardService.getTasksData;
+    }
 
-        dCtrl.user = {};
-
-        $http.get('/api/users').then(function (res) {
-           dCtrl.users = res.data;
-           console.log(dCtrl.users)
-        });
-
-        function a() {
-            dCtrl.user = {
-                username: dCtrl.username,
-                password: dCtrl.password
-            };
-
-            $http.post('/api/users', dCtrl.user).then(function (res) {
-                dCtrl.users = res.data;
-                console.log(dCtrl.users);
-            })
-        }
+    getTasks() {
+        return this.getTasksData.then((response) => response.data);
     }
 }
 
-angular
-    .module('TaskManager')
-    .controller('DashboardCtrl', DashboardCtrl);
-
+DashboardCtrl.$inject = ['$http', 'DashboardService'];

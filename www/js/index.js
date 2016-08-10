@@ -46,14 +46,16 @@
 
 	__webpack_require__(1);
 	__webpack_require__(8);
-	__webpack_require__(9);
-	__webpack_require__(6);
 	__webpack_require__(4);
-	__webpack_require__(2);
-	__webpack_require__(10);
+	__webpack_require__(11);
 	__webpack_require__(3);
+	__webpack_require__(10);
+	__webpack_require__(6);
 	__webpack_require__(7);
-	module.exports = __webpack_require__(5);
+	__webpack_require__(9);
+	__webpack_require__(5);
+	__webpack_require__(2);
+	module.exports = __webpack_require__(12);
 
 
 /***/ },
@@ -61,6 +63,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+	
+	// Configs
 	
 	var _routes = __webpack_require__(2);
 	
@@ -70,25 +74,40 @@
 	
 	var _routes4 = _interopRequireDefault(_routes3);
 	
-	var _LogInService = __webpack_require__(4);
+	var _DashboardService = __webpack_require__(4);
+	
+	var _DashboardService2 = _interopRequireDefault(_DashboardService);
+	
+	var _LogInService = __webpack_require__(5);
 	
 	var _LogInService2 = _interopRequireDefault(_LogInService);
 	
-	var _SignInService = __webpack_require__(5);
+	var _SignInService = __webpack_require__(6);
 	
 	var _SignInService2 = _interopRequireDefault(_SignInService);
 	
-	var _LogInCtrl = __webpack_require__(6);
+	var _MainCtrl = __webpack_require__(7);
+	
+	var _MainCtrl2 = _interopRequireDefault(_MainCtrl);
+	
+	var _DashboardCtrl = __webpack_require__(8);
+	
+	var _DashboardCtrl2 = _interopRequireDefault(_DashboardCtrl);
+	
+	var _LogInCtrl = __webpack_require__(9);
 	
 	var _LogInCtrl2 = _interopRequireDefault(_LogInCtrl);
 	
-	var _SignInCtrl = __webpack_require__(7);
+	var _SignInCtrl = __webpack_require__(10);
 	
 	var _SignInCtrl2 = _interopRequireDefault(_SignInCtrl);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	angular.module('TaskManager', ['ui.router']).config(_routes2.default).config(_routes4.default).service('SignInService', _SignInService2.default).service('LogInService', _LogInService2.default).controller('LogInCtrl', _LogInCtrl2.default).controller('SignInCtrl', _SignInCtrl2.default);
+	// Controllers
+	angular.module('TaskManager', ['ui.router']).config(_routes2.default).config(_routes4.default).service('DashboardService', _DashboardService2.default).service('SignInService', _SignInService2.default).service('LogInService', _LogInService2.default).controller('MainCtrl', _MainCtrl2.default).controller('DashboardCtrl', _DashboardCtrl2.default).controller('LogInCtrl', _LogInCtrl2.default).controller('SignInCtrl', _SignInCtrl2.default);
+	
+	// Services
 
 /***/ },
 /* 2 */
@@ -138,7 +157,46 @@
 	    value: true
 	});
 	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var DashboardService = function () {
+	    function DashboardService($http) {
+	        _classCallCheck(this, DashboardService);
+	
+	        this.$http = $http;
+	    }
+	
+	    _createClass(DashboardService, [{
+	        key: 'getTasksData',
+	        value: function getTasksData() {
+	            return this.$http.get('api/tasks');
+	        }
+	    }, {
+	        key: 'createTaskData',
+	        value: function createTaskData(task) {
+	            return this.$http.post('api/tasks' + task);
+	        }
+	    }]);
+	
+	    return DashboardService;
+	}();
+	
+	exports.default = DashboardService;
+	
+	
+	DashboardService.$inject = ['$http'];
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -154,8 +212,6 @@
 	    _createClass(LogInService, [{
 	        key: 'getUserData',
 	        value: function getUserData(user) {
-	            console.log(user, typeof user === 'undefined' ? 'undefined' : _typeof(user));
-	
 	            return this.$http.get('api/users/' + user);
 	        }
 	    }]);
@@ -169,7 +225,7 @@
 	LogInService.$inject = ['$http'];
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -224,7 +280,87 @@
 	exports.default = SignInService;
 
 /***/ },
-/* 6 */
+/* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var MainCtrl = function () {
+	    function MainCtrl($rootScope, $state) {
+	        _classCallCheck(this, MainCtrl);
+	
+	        this.$rootScope = $rootScope;
+	        this.$state = $state;
+	
+	        ///
+	
+	        this.$rootScope.$on('isLoged', this.isLogedd());
+	    }
+	
+	    _createClass(MainCtrl, [{
+	        key: 'isLogedd',
+	        value: function isLogedd() {
+	            return this.$state.go('dashboard');
+	        }
+	    }]);
+	
+	    return MainCtrl;
+	}();
+	
+	exports.default = MainCtrl;
+	
+	
+	MainCtrl.$inject = ['$rootScope', '$state'];
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var DashboardCtrl = function () {
+	    function DashboardCtrl($http, DashboardService) {
+	        _classCallCheck(this, DashboardCtrl);
+	
+	        this.$http = $http;
+	        this.getTasksData = DashboardService.getTasksData;
+	    }
+	
+	    _createClass(DashboardCtrl, [{
+	        key: 'getTasks',
+	        value: function getTasks() {
+	            return this.getTasksData.then(function (response) {
+	                return response.data;
+	            });
+	        }
+	    }]);
+	
+	    return DashboardCtrl;
+	}();
+	
+	exports.default = DashboardCtrl;
+	
+	
+	DashboardCtrl.$inject = ['$http', 'DashboardService'];
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -242,6 +378,7 @@
 	        _classCallCheck(this, LogInCtrl);
 	
 	        this.$http = $http;
+	        this.$rootScope = $rootScope;
 	        this.getUserData = LogInService.getUserData;
 	    }
 	
@@ -250,9 +387,11 @@
 	        value: function getUser() {
 	            var _this = this;
 	
-	            return this.getUserData(this.username).then(function (response) {
-	                if (typeof response.data.username !== 'undefined' && _this.password === response.data.password) {
-	                    $rootScope.$emit('isLoged');
+	            return this.getUserData(this.username).then(function (response, err) {
+	                if (response.data.username !== undefined && _this.password === response.data.password) {
+	                    _this.$rootScope.$broadcast('isLoged');
+	                } else if (err) {
+	                    console.log('Wrong username;');
 	                }
 	
 	                console.log(response.data.password, response.data.username);
@@ -269,7 +408,7 @@
 	LogInCtrl.$inject = ['$http', '$rootScope', 'LogInService'];
 
 /***/ },
-/* 7 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -301,43 +440,7 @@
 	exports.default = SignInCtrl;
 
 /***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var DashboardCtrl = function DashboardCtrl($http) {
-	    _classCallCheck(this, DashboardCtrl);
-	
-	    var dCtrl = this;
-	    dCtrl.a = a;
-	
-	    dCtrl.user = {};
-	
-	    $http.get('/api/users').then(function (res) {
-	        dCtrl.users = res.data;
-	        console.log(dCtrl.users);
-	    });
-	
-	    function a() {
-	        dCtrl.user = {
-	            username: dCtrl.username,
-	            password: dCtrl.password
-	        };
-	
-	        $http.post('/api/users', dCtrl.user).then(function (res) {
-	            dCtrl.users = res.data;
-	            console.log(dCtrl.users);
-	        });
-	    }
-	};
-	
-	angular.module('TaskManager').controller('DashboardCtrl', DashboardCtrl);
-
-/***/ },
-/* 9 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -360,12 +463,17 @@
 	            controller: 'DashboardCtrl',
 	            controllerAs: 'dCtrl',
 	            templateUrl: '../app/Dashboard/dashboard.html'
+	        }).state('dashboard.createTask', {
+	            url: '/createtask',
+	            controller: 'CreateTaskCtrl',
+	            controllerAs: 'ctCtrl',
+	            templateUrl: '../app/Dashboard/createTask/createTask.html'
 	        });
 	    }
 	})();
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -376,13 +484,13 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var MainCtrl = function MainCtrl() {
-	    _classCallCheck(this, MainCtrl);
+	var CreateTaskCtrl = function CreateTaskCtrl($http) {
+	    _classCallCheck(this, CreateTaskCtrl);
 	
-	    var mCtrl = this;
+	    this.$http = $http;
 	};
 	
-	exports.default = MainCtrl;
+	exports.default = CreateTaskCtrl;
 
 /***/ }
 /******/ ]);
