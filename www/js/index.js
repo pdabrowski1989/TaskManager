@@ -45,22 +45,25 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
+	__webpack_require__(17);
+	__webpack_require__(11);
+	__webpack_require__(6);
+	__webpack_require__(4);
+	__webpack_require__(13);
+	__webpack_require__(8);
+	__webpack_require__(2);
+	__webpack_require__(20);
+	__webpack_require__(16);
+	__webpack_require__(19);
 	__webpack_require__(15);
 	__webpack_require__(10);
 	__webpack_require__(5);
-	__webpack_require__(4);
-	__webpack_require__(12);
-	__webpack_require__(7);
-	__webpack_require__(2);
-	__webpack_require__(9);
-	__webpack_require__(17);
-	__webpack_require__(14);
 	__webpack_require__(3);
-	__webpack_require__(13);
-	__webpack_require__(8);
-	__webpack_require__(16);
-	__webpack_require__(11);
-	module.exports = __webpack_require__(6);
+	__webpack_require__(14);
+	__webpack_require__(9);
+	__webpack_require__(18);
+	__webpack_require__(12);
+	module.exports = __webpack_require__(7);
 
 
 /***/ },
@@ -83,58 +86,66 @@
 	
 	var _routes6 = _interopRequireDefault(_routes5);
 	
-	var _dashboard = __webpack_require__(5);
+	var _routes7 = __webpack_require__(5);
+	
+	var _routes8 = _interopRequireDefault(_routes7);
+	
+	var _dashboard = __webpack_require__(6);
 	
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 	
-	var _createTask = __webpack_require__(6);
+	var _createTask = __webpack_require__(7);
 	
 	var _createTask2 = _interopRequireDefault(_createTask);
 	
-	var _LogInService = __webpack_require__(7);
+	var _LogInService = __webpack_require__(8);
 	
 	var _LogInService2 = _interopRequireDefault(_LogInService);
 	
-	var _SignInService = __webpack_require__(8);
+	var _SignInService = __webpack_require__(9);
 	
 	var _SignInService2 = _interopRequireDefault(_SignInService);
 	
-	var _MainCtrl = __webpack_require__(9);
+	var _main = __webpack_require__(10);
 	
-	var _MainCtrl2 = _interopRequireDefault(_MainCtrl);
+	var _main2 = _interopRequireDefault(_main);
 	
-	var _dashboard3 = __webpack_require__(10);
+	var _dashboard3 = __webpack_require__(11);
 	
 	var _dashboard4 = _interopRequireDefault(_dashboard3);
 	
-	var _createTask3 = __webpack_require__(11);
+	var _createTask3 = __webpack_require__(12);
 	
 	var _createTask4 = _interopRequireDefault(_createTask3);
 	
-	var _LogInCtrl = __webpack_require__(12);
+	var _LogInCtrl = __webpack_require__(13);
 	
 	var _LogInCtrl2 = _interopRequireDefault(_LogInCtrl);
 	
-	var _SignInCtrl = __webpack_require__(13);
+	var _SignInCtrl = __webpack_require__(14);
 	
 	var _SignInCtrl2 = _interopRequireDefault(_SignInCtrl);
 	
-	var _sidebar = __webpack_require__(14);
+	var _sidebar = __webpack_require__(15);
 	
 	var _sidebar2 = _interopRequireDefault(_sidebar);
 	
-	var _dashboard5 = __webpack_require__(15);
+	var _navigation = __webpack_require__(16);
 	
-	var _createTask5 = __webpack_require__(16);
+	var _navigation2 = _interopRequireDefault(_navigation);
 	
-	var _sidebar3 = __webpack_require__(17);
+	var _dashboard5 = __webpack_require__(17);
+	
+	var _createTask5 = __webpack_require__(18);
+	
+	var _sidebar3 = __webpack_require__(19);
+	
+	var _navigation3 = __webpack_require__(20);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	angular.module('TaskManager', ['ui.router']).config(_routes2.default).config(_routes4.default).config(_routes6.default).service('DashboardService', _dashboard2.default).service('SignInService', _SignInService2.default).service('LogInService', _LogInService2.default).service('CreateTaskService', _createTask2.default).controller('MainCtrl', _MainCtrl2.default).controller('DashboardCtrl', _dashboard4.default).controller('CreateTaskCtrl', _createTask4.default).controller('LogInCtrl', _LogInCtrl2.default).controller('SignInCtrl', _SignInCtrl2.default).controller('SidebarCtrl', _sidebar2.default).component('createTaskComponent', _createTask5.CreateTaskComponent).component('dashboardComponent', _dashboard5.DashboardComponent).component('sidebarComponent', _sidebar3.SidebarComponent);
-	
 	// Components
-	
+	angular.module('TaskManager', ['ui.router']).config(_routes2.default).config(_routes4.default).config(_routes6.default).config(_routes8.default).service('DashboardService', _dashboard2.default).service('SignInService', _SignInService2.default).service('LogInService', _LogInService2.default).service('CreateTaskService', _createTask2.default).controller('MainCtrl', _main2.default).controller('DashboardCtrl', _dashboard4.default).controller('CreateTaskCtrl', _createTask4.default).controller('LogInCtrl', _LogInCtrl2.default).controller('SignInCtrl', _SignInCtrl2.default).controller('SidebarCtrl', _sidebar2.default).controller('NavigationCtrl', _navigation2.default).component('createTaskComponent', _createTask5.CreateTaskComponent).component('dashboardComponent', _dashboard5.DashboardComponent).component('navigationComponent', _navigation3.NavigationComponent).component('sidebarComponent', _sidebar3.SidebarComponent);
 	
 	// Controllers
 	
@@ -192,17 +203,38 @@
 	});
 	exports.default = DashboardConfig;
 	function DashboardConfig($stateProvider) {
-	    $stateProvider.state('dashboard', {
+	    $stateProvider.state('home.dashboard', {
 	        url: '/dashboard',
 	        template: '<dashboard-component></dashboard-component>'
-	    }).state('dashboard.createTask', {
+	    }).state('home.createTask', {
 	        url: '/createtask',
-	        template: '<create-task-component></create-task-component>'
+	        template: '<create-task-component taskname="$ctrl.taskName" taskdsc="$ctrl.taskdsc" user="$ctrl.model"></create-task-component>'
 	    });
 	}
 
 /***/ },
 /* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = MainConfig;
+	function MainConfig($stateProvider) {
+	    $stateProvider.state('home', {
+	        url: '/home',
+	        controller: 'MainCtrl',
+	        controllerAs: 'mCtrl',
+	        templateUrl: '../app/Main/home.template.html'
+	    });
+	}
+	
+	MainConfig.$inject = ['$stateProvider'];
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -248,7 +280,7 @@
 	DashboardService.$inject = ['$http'];
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -282,7 +314,7 @@
 	exports.default = CreateTaskService;
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -318,7 +350,7 @@
 	LogInService.$inject = ['$http'];
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -373,7 +405,7 @@
 	exports.default = SignInService;
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -384,21 +416,20 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var MainCtrl = function MainCtrl($rootScope, $state) {
+	var MainCtrl = function MainCtrl($rootScope) {
 	    _classCallCheck(this, MainCtrl);
 	
-	    this._$rootScope = $rootScope;
-	    this._$state = $state;
-	    this._$rootScope.isLoged = false;
+	    this.$rootScope = $rootScope;
+	    this.$rootScope.version = '1.0.0';
 	};
 	
 	exports.default = MainCtrl;
 	
 	
-	MainCtrl.$inject = ['$rootScope', '$state'];
+	MainCtrl.$inject = ['$rootScope'];
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -463,7 +494,7 @@
 	DashboardCtrl.$inject = ['$http', '$rootScope', 'DashboardService'];
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -485,6 +516,7 @@
 	        this.$state = $state;
 	        this.getUsersData = DashboardService.getUsersData;
 	        this.postAddTask = CreateTaskService.postAddTask;
+	        this.allInputsAreFilled = false;
 	        this.users = [];
 	        this.userAssigned = null;
 	        this.taskName = '';
@@ -502,11 +534,6 @@
 	        key: '$onInit',
 	        value: function $onInit() {
 	            this.getUsers();
-	        }
-	    }, {
-	        key: '$onChanges',
-	        value: function $onChanges() {
-	            console.log('dupa');
 	        }
 	    }, {
 	        key: 'getUsers',
@@ -561,7 +588,7 @@
 	CreateTaskCtrl.$inject = ['$http', '$rootScope', '$state', 'DashboardService', 'CreateTaskService'];
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -586,7 +613,7 @@
 	LogInCtrl.$inject = ['$http', '$rootScope', 'LogInService'];
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -618,7 +645,7 @@
 	exports.default = SignInCtrl;
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -629,17 +656,51 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var SidebarCtrl = function SidebarCtrl() {
+	var SidebarCtrl = function SidebarCtrl($rootScope) {
 	    _classCallCheck(this, SidebarCtrl);
+	
+	    this.user = 'Zalogowany';
+	    this.version = $rootScope.version;
+	    this.options = [{
+	        name: 'My tasks',
+	        state: ''
+	    }, {
+	        name: 'All tasks',
+	        state: ''
+	    }, {
+	        name: 'Log out',
+	        state: ''
+	    }];
 	};
 	
 	exports.default = SidebarCtrl;
 	
 	
-	SidebarCtrl.$inject = [];
+	SidebarCtrl.$inject = ['$rootScope'];
 
 /***/ },
-/* 15 */
+/* 16 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var NavigationCtrl = function NavigationCtrl($rootScope) {
+	    _classCallCheck(this, NavigationCtrl);
+	};
+	
+	exports.default = NavigationCtrl;
+	
+	
+	NavigationCtrl.$inject = ['$rootScope'];
+
+/***/ },
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -653,7 +714,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -663,11 +724,16 @@
 	});
 	var CreateTaskComponent = exports.CreateTaskComponent = {
 	    templateUrl: '../app/Dashboard/CreateTask/create.task.template.html',
-	    controller: 'CreateTaskCtrl'
+	    controller: 'CreateTaskCtrl',
+	    bindings: {
+	        taskname: '<',
+	        taskdsc: '<',
+	        user: '='
+	    }
 	};
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -677,7 +743,22 @@
 	});
 	var SidebarComponent = exports.SidebarComponent = {
 	    templateUrl: '../app/Sidebar/sidebar.template.html',
-	    controller: 'SidebarCtrl'
+	    controller: 'SidebarCtrl',
+	    bindings: {}
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var NavigationComponent = exports.NavigationComponent = {
+	    templateUrl: '../app/Navigation/navigation.template.html',
+	    controller: 'NavigationCtrl'
 	};
 
 /***/ }

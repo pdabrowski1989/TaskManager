@@ -7,6 +7,7 @@ export default class CreateTaskCtrl {
         this.$state = $state;
         this.getUsersData = DashboardService.getUsersData;
         this.postAddTask = CreateTaskService.postAddTask;
+        this.allInputsAreFilled =false;
         this.users = [];
         this.userAssigned = null;
         this.taskName = '';

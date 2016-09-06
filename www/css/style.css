@@ -1,5 +1,38 @@
+@font-face {
+  font-family: OpenSans;
+  font-weight: 300;
+  src: url(../fonts/OpenSans-Light.ttf);
+}
+@font-face {
+  font-family: OpenSans;
+  font-weight: 500;
+  src: url(../fonts/OpenSans-Regular.ttf);
+}
+@font-face {
+  font-family: OpenSans;
+  font-weight: 600;
+  src: url(../fonts/OpenSans-Semibold.ttf);
+}
+.form-group {
+  font-family: 'OpenSans', sans-serif;
+  font-weight: 300;
+}
+.form-group .form-control {
+  border-radius: 0;
+}
 body {
   background: #f7f7f7;
+}
+.padding-top {
+  padding-top: 10px;
+}
+.padding-top-l {
+  padding-top: calc(20px);
+}
+h1,
+h2,
+h3 {
+  margin: 0;
 }
 .portlet {
   border: solid 1px #ddd;
@@ -9,15 +42,46 @@ body {
   background: #fff;
 }
 .sidebar {
-  background: black;
+  background: #607D8B;
+  font-family: 'OpenSans', sans-serif;
+  font-weight: 300;
   min-height: 100vh;
-  width: 200px;
+  width: 250px;
+  color: #fff;
+}
+.sidebar .sidebar-container {
+  padding: 30px;
+}
+.sidebar .sidebar-title {
+  padding: 10px 30px;
+  border-bottom: solid 1px #74919e;
+}
+.sidebar .sidebar-title h3 {
+  font-weight: 300;
+}
+.sidebar .small {
+  color: #fff;
+  font-size: 50%;
+}
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar ul li a {
+  font-size: 16px;
+  color: #fff;
+}
+.log-in-container {
+  display: inline-block;
+  align-self: center;
 }
 .wrap-context {
   display: flex;
   flex-direction: row;
 }
 .wrap-context .context {
-  padding: 30px;
   width: 100%;
+}
+.wrap-context .context-container {
+  padding: 30px;
 }

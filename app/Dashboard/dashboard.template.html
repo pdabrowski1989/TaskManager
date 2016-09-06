@@ -4,18 +4,21 @@
               {{$ctrl.alertDesc}}
         </div>
 
-        <button ui-sref="dashboard.createTask" class="btn btn-success">Create task</button>
+        <button ui-sref="home.createTask" class="btn btn-success">Create task</button>
 
-        <table class="table padding-top">
-            <tr>
-                <th></th>
-            </tr>
-            <tbody>
-            <tr ng-repeat="task in $ctrl.tasks">
-                <td>{{task.description}}</td>
-                <td>{{task.id}}</td>
-            </tr>
-            </tbody>
-        </table>
+      <div class="padding-top-l">
+          <table class="table">
+              <tr>
+                  <th></th>
+                  <th></th>
+              </tr>
+              <tbody>
+              <tr ng-repeat="task in $ctrl.tasks">
+                  <td>{{task.description}}</td>
+                  <td>{{task.id}}</td>
+              </tr>
+              </tbody>
+          </table>
+      </div>
     </div>
 </div>

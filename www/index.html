@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="TaskManager" ng-controller="MainCtrl" lang="en">
+<html ng-app="TaskManager" version="{{version}}" ng-controller="MainCtrl" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,10 +7,7 @@
     <link type="text/css" rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="wrap-context">
-    <sidebar-component></sidebar-component>
-    <div class="context" ui-view></div>
-</div>
+<div ui-view></div>
 
 <!-- Libs -->
 <script src="libs/jquery/dist/jquery.min.js"></script>

@@ -1,3 +1,14 @@
 <div class="sidebar">
+    <div class="sidebar-title">
+        <h3>Task Manager <span class="small">{{$ctrl.version}}</span></h3>
+        <small>Dabrowski Pawel</small>
+    </div>
 
+    <div class="sidebar-container">
+        <ul>
+            <li ng-repeat="option in $ctrl.options">
+                <a ui-sref="{{option.state}}">{{option.name}}</a>
+            </li>
+        </ul>
+    </div>
 </div>

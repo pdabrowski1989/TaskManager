@@ -2,5 +2,8 @@
 
 export const SidebarComponent = {
     templateUrl: '../app/Sidebar/sidebar.template.html',
-    controller: 'SidebarCtrl'
+    controller: 'SidebarCtrl',
+    bindings: {
+
+    }
 };
