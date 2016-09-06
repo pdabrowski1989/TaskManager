@@ -7,5 +7,7 @@ export default function LogInConfig($stateProvider) {
             controller: 'LogInCtrl',
             controllerAs: 'lCtrl',
             templateUrl: '../app/LogIn/login.html'
-        })
-}
+        });
+ }
+
+LogInConfig.$inject = ['$stateProvider'];

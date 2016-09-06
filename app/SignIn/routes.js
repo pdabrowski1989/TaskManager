@@ -7,5 +7,5 @@ export default function SignInConfig($stateProvider) {
             controller: 'SignInCtrl',
             controllerAs: 'sCtrl',
             templateUrl: '../app/SignIn/signin.html'
-        })
+        });
 }

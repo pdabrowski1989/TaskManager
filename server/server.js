@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var User = require('./models/user');
-var Tasks = require('./models/task');
+var Task = require('./models/task');
 var app = express();
 var router = express.Router();
 var db = mongoose.connection;
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //========== Connect to db.
-mongoose.connect('mongodb://localhost/test8');
+mongoose.connect('mongodb://localhost/test888');
 /*mongoose.connect('mongodb://mo1008_taskM:9Mzc64EfBzs5diwSBR5a@85.194.242.107:27017/mo1008_taskM');*/
 db.on('error', function () {
     console.log('Connection Error.')
@@ -42,14 +42,7 @@ router.get('/users', function (req, res) {
     });
 });
 
-router.get('/tasks', function (req, res) {
-    User.find(function (err, tasks) {
-        if (err) res.send(err);
-        res.json(tasks);
-    });
-});
-
-router.get('/users/:username', function (req, res) {
+router.get('/users/:username', (req, res) => {
     User.findOne({username: req.params.username}, function (err, user) {
         if (err) res.send(err);
         res.json(user);
@@ -71,12 +64,17 @@ router.post('/users', function (req, res) {
     })
 });
 
-router.post('/task', function (req, res) {
-    User.create({
+router.post('/tasks', (req, res) => {
+    Task.create({
         id: req.body.id,
+        date: req.body.date,
+        done: req.body.done,
+        status: req.body.status,
+        taskName: req.body.taskName,
         description: req.body.description,
+        comments: req.body.comments,
         assign: req.body.assign
-    }, function (err, task) {
+    }, (err, task) => {
         if (err) console.log(err);
 
         Task.find(function (err, tasks) {
@@ -86,6 +84,12 @@ router.post('/task', function (req, res) {
     })
 });
 
+router.get('/tasks', (req, res) => {
+    Task.find((err, tasks) => {
+        if (err) res.send(err);
+        res.json(tasks);
+    });
+});
 
 //========== Init
 app.use('/api', router);
