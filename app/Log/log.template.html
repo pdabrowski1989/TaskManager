@@ -1,0 +1,17 @@
+<div class="center-box">
+   <div class="log-in-wrapper">
+       <div ng-if="$ctrl.showAlert" class="alert" ng-class="{'alert-danger': $ctrl.alertType === 0, 'alert-success': $ctrl.alertType === 1,}">
+           {{$ctrl.alertDesc}}
+       </div>
+       <div class="log-in">
+           <div class="log-in-container">
+               <div class="title">
+                   <h1 ng-bind-html="$ctrl.logTitle"></h1>
+               </div>
+               <div class="padding-top-l" ui-view></div>
+               <span class="small title-small">Task Manager <span class="colored">{{$ctrl.version}}</span></span>
+           </div>
+           <div class="log-in-img"></div>
+       </div>
+   </div>
+</div>

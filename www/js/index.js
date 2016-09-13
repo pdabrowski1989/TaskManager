@@ -45,25 +45,27 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(17);
-	__webpack_require__(11);
-	__webpack_require__(6);
-	__webpack_require__(4);
-	__webpack_require__(13);
-	__webpack_require__(8);
-	__webpack_require__(2);
-	__webpack_require__(20);
-	__webpack_require__(16);
 	__webpack_require__(19);
 	__webpack_require__(15);
+	__webpack_require__(16);
 	__webpack_require__(10);
 	__webpack_require__(5);
 	__webpack_require__(3);
+	__webpack_require__(18);
 	__webpack_require__(14);
 	__webpack_require__(9);
-	__webpack_require__(18);
+	__webpack_require__(4);
+	__webpack_require__(20);
 	__webpack_require__(12);
-	module.exports = __webpack_require__(7);
+	__webpack_require__(7);
+	__webpack_require__(2);
+	__webpack_require__(17);
+	__webpack_require__(11);
+	__webpack_require__(6);
+	__webpack_require__(23);
+	__webpack_require__(22);
+	__webpack_require__(13);
+	module.exports = __webpack_require__(8);
 
 
 /***/ },
@@ -86,71 +88,73 @@
 	
 	var _routes6 = _interopRequireDefault(_routes5);
 	
-	var _routes7 = __webpack_require__(5);
-	
-	var _routes8 = _interopRequireDefault(_routes7);
-	
-	var _dashboard = __webpack_require__(6);
+	var _dashboard = __webpack_require__(5);
 	
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 	
-	var _createTask = __webpack_require__(7);
+	var _createTask = __webpack_require__(6);
 	
 	var _createTask2 = _interopRequireDefault(_createTask);
 	
-	var _LogInService = __webpack_require__(8);
+	var _logIn = __webpack_require__(7);
 	
-	var _LogInService2 = _interopRequireDefault(_LogInService);
+	var _logIn2 = _interopRequireDefault(_logIn);
 	
-	var _SignInService = __webpack_require__(9);
+	var _signIn = __webpack_require__(8);
 	
-	var _SignInService2 = _interopRequireDefault(_SignInService);
+	var _signIn2 = _interopRequireDefault(_signIn);
 	
-	var _main = __webpack_require__(10);
+	var _main = __webpack_require__(9);
 	
 	var _main2 = _interopRequireDefault(_main);
 	
-	var _dashboard3 = __webpack_require__(11);
+	var _dashboard3 = __webpack_require__(10);
 	
 	var _dashboard4 = _interopRequireDefault(_dashboard3);
 	
-	var _createTask3 = __webpack_require__(12);
+	var _createTask3 = __webpack_require__(11);
 	
 	var _createTask4 = _interopRequireDefault(_createTask3);
 	
-	var _LogInCtrl = __webpack_require__(13);
+	var _logIn3 = __webpack_require__(12);
 	
-	var _LogInCtrl2 = _interopRequireDefault(_LogInCtrl);
+	var _logIn4 = _interopRequireDefault(_logIn3);
 	
-	var _SignInCtrl = __webpack_require__(14);
+	var _signIn3 = __webpack_require__(13);
 	
-	var _SignInCtrl2 = _interopRequireDefault(_SignInCtrl);
+	var _signIn4 = _interopRequireDefault(_signIn3);
 	
-	var _sidebar = __webpack_require__(15);
+	var _sidebar = __webpack_require__(14);
 	
 	var _sidebar2 = _interopRequireDefault(_sidebar);
 	
-	var _navigation = __webpack_require__(16);
+	var _navigation = __webpack_require__(15);
 	
 	var _navigation2 = _interopRequireDefault(_navigation);
 	
-	var _dashboard5 = __webpack_require__(17);
+	var _dashboard5 = __webpack_require__(16);
 	
-	var _createTask5 = __webpack_require__(18);
+	var _createTask5 = __webpack_require__(17);
 	
-	var _sidebar3 = __webpack_require__(19);
+	var _sidebar3 = __webpack_require__(18);
 	
-	var _navigation3 = __webpack_require__(20);
+	var _navigation3 = __webpack_require__(19);
+	
+	var _logIn5 = __webpack_require__(20);
+	
+	var _in = __webpack_require__(21);
+	
+	var _signIn5 = __webpack_require__(22);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// Components
-	angular.module('TaskManager', ['ui.router']).config(_routes2.default).config(_routes4.default).config(_routes6.default).config(_routes8.default).service('DashboardService', _dashboard2.default).service('SignInService', _SignInService2.default).service('LogInService', _LogInService2.default).service('CreateTaskService', _createTask2.default).controller('MainCtrl', _main2.default).controller('DashboardCtrl', _dashboard4.default).controller('CreateTaskCtrl', _createTask4.default).controller('LogInCtrl', _LogInCtrl2.default).controller('SignInCtrl', _SignInCtrl2.default).controller('SidebarCtrl', _sidebar2.default).controller('NavigationCtrl', _navigation2.default).component('createTaskComponent', _createTask5.CreateTaskComponent).component('dashboardComponent', _dashboard5.DashboardComponent).component('navigationComponent', _navigation3.NavigationComponent).component('sidebarComponent', _sidebar3.SidebarComponent);
 	
 	// Controllers
 	
 	
 	// Services
+	angular.module('TaskManager', ['ui.router', 'ngSanitize']).config(_routes2.default).config(_routes4.default).config(_routes6.default).service('DashboardService', _dashboard2.default).service('SignInService', _signIn2.default).service('LogInService', _logIn2.default).service('CreateTaskService', _createTask2.default).controller('MainCtrl', _main2.default).controller('DashboardCtrl', _dashboard4.default).controller('CreateTaskCtrl', _createTask4.default).controller('LogInCtrl', _logIn4.default).controller('SignInCtrl', _signIn4.default).controller('SidebarCtrl', _sidebar2.default).controller('NavigationCtrl', _navigation2.default).component('createTaskComponent', _createTask5.CreateTaskComponent).component('dashboardComponent', _dashboard5.DashboardComponent).component('navigationComponent', _navigation3.NavigationComponent).component('sidebarComponent', _sidebar3.SidebarComponent).component('logComponent', _logIn5.LogComponent).component('inComponent', _in.InComponent).component('signInComponent', _signIn5.SignInComponent);
+	
+	// Components
 
 /***/ },
 /* 2 */
@@ -163,11 +167,15 @@
 	});
 	exports.default = LogInConfig;
 	function LogInConfig($stateProvider) {
-	    $stateProvider.state('logIn', {
-	        url: '/logIn',
-	        controller: 'LogInCtrl',
-	        controllerAs: 'lCtrl',
-	        templateUrl: '../app/LogIn/login.html'
+	    $stateProvider.state('log', {
+	        url: '/log',
+	        template: '<log-component></log-component>'
+	    }).state('log.in', {
+	        url: '/in',
+	        template: '<in-component></in-component>'
+	    }).state('log.signin', {
+	        url: '/signin',
+	        template: '<sign-in-component></sign-in-component>'
 	    });
 	}
 	
@@ -175,25 +183,6 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.default = SignInConfig;
-	function SignInConfig($stateProvider) {
-	    $stateProvider.state('signIn', {
-	        url: '/signIn',
-	        controller: 'SignInCtrl',
-	        controllerAs: 'sCtrl',
-	        templateUrl: '../app/SignIn/signin.html'
-	    });
-	}
-
-/***/ },
-/* 4 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -213,7 +202,7 @@
 	}
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -234,7 +223,7 @@
 	MainConfig.$inject = ['$stateProvider'];
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -280,7 +269,7 @@
 	DashboardService.$inject = ['$http'];
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -314,7 +303,7 @@
 	exports.default = CreateTaskService;
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -350,7 +339,7 @@
 	LogInService.$inject = ['$http'];
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -405,7 +394,7 @@
 	exports.default = SignInService;
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -429,7 +418,7 @@
 	MainCtrl.$inject = ['$rootScope'];
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -494,7 +483,7 @@
 	DashboardCtrl.$inject = ['$http', '$rootScope', 'DashboardService'];
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -588,7 +577,7 @@
 	CreateTaskCtrl.$inject = ['$http', '$rootScope', '$state', 'DashboardService', 'CreateTaskService'];
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -597,23 +586,57 @@
 	    value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var LogInCtrl = function LogInCtrl($http, $rootScope, LogInService) {
-	    _classCallCheck(this, LogInCtrl);
+	var LogInCtrl = function () {
+	    function LogInCtrl($watch, $state, $rootScope, LogInService) {
+	        var _this = this;
 	
-	    this.$http = $http;
-	    this.$rootScope = $rootScope;
-	    this.getUserData = LogInService.getUserData;
-	};
+	        _classCallCheck(this, LogInCtrl);
+	
+	        this.version = $rootScope.version;
+	        this.$state = $state;
+	        this.getUserData = LogInService.getUserData;
+	        this.$watch('logTitle', function () {
+	            return _this.logTitle;
+	        });
+	
+	        ////
+	
+	        this.checkTitle = this.checkTitle.bind(this);
+	        $rootScope.$on('$stateChangeStart', function () {
+	            return _this.checkTitle();
+	        });
+	    }
+	
+	    _createClass(LogInCtrl, [{
+	        key: '$onInit',
+	        value: function $onInit() {
+	            this.checkTitle();
+	        }
+	    }, {
+	        key: 'checkTitle',
+	        value: function checkTitle() {
+	            if (this.$state.current.name === 'log.signin') {
+	                this.logTitle = "Sign <strong class='colored'>in.</strong>";
+	            } else {
+	                this.logTitle = "Log <strong class='colored'>in.</strong>";
+	            }
+	        }
+	    }]);
+	
+	    return LogInCtrl;
+	}();
 	
 	exports.default = LogInCtrl;
 	
 	
-	LogInCtrl.$inject = ['$http', '$rootScope', 'LogInService'];
+	LogInCtrl.$inject = ['$watch', '$state', '$rootScope', 'LogInService'];
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -645,7 +668,7 @@
 	exports.default = SignInCtrl;
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -679,7 +702,7 @@
 	SidebarCtrl.$inject = ['$rootScope'];
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -700,7 +723,7 @@
 	NavigationCtrl.$inject = ['$rootScope'];
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -714,7 +737,7 @@
 	};
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -733,7 +756,7 @@
 	};
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -748,7 +771,7 @@
 	};
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -759,6 +782,62 @@
 	var NavigationComponent = exports.NavigationComponent = {
 	    templateUrl: '../app/Navigation/navigation.template.html',
 	    controller: 'NavigationCtrl'
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var LogComponent = exports.LogComponent = {
+	    templateUrl: '../app/Log/log.template.html',
+	    controller: 'LogInCtrl'
+	};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var InComponent = exports.InComponent = {
+	    templateUrl: '../app/Log/In/in.template.html',
+	    controller: 'LogInCtrl'
+	};
+
+/***/ },
+/* 22 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var SignInComponent = exports.SignInComponent = {
+	    templateUrl: '../app/Log/SignIn/sign.in.template.html',
+	    controller: 'SignInCtrl'
+	};
+
+/***/ },
+/* 23 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var InComponent = exports.InComponent = {
+	    templateUrl: '../app/Log/In/in.template.html',
+	    controller: 'LogInCtrl'
 	};
 
 /***/ }

@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
 var User = require('./models/user');
 var Task = require('./models/task');
 var app = express();
@@ -14,17 +15,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //========== Connect to db.
-mongoose.connect('mongodb://localhost/test1_3');
+mongoose.connect('mongodb://localhost/test1_4');
 /*mongoose.connect('mongodb://mo1008_taskM:9Mzc64EfBzs5diwSBR5a@85.194.242.107:27017/mo1008_taskM');*/
-db.on('error', function () {
+db.on('error', () => {
     console.log('Connection Error.')
 });
-db.once('open', function () {
+db.once('open',() => {
     console.log('Connection Success.')
 });
 
 //========== Index View
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.sendFile(projectPath + 'www/index.html')
 });
 
@@ -33,6 +34,7 @@ app.use('/app', express.static(projectPath + 'app'));
 app.use('/libs', express.static(projectPath + 'www/libs'));
 app.use('/js', express.static(projectPath + 'www/js'));
 app.use('/css', express.static(projectPath + 'www/css'));
+app.use('/img', express.static(projectPath + 'www/img'));
 app.use('/fonts', express.static(projectPath + 'www/fonts'));
 
 //========== Routes

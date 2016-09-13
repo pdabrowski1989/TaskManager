@@ -1,4 +1,37 @@
-.log-in-container {
-  display: inline-block;
-  align-self: center;
+.log-in-wrapper {
+  min-width: 420px;
+
+}
+
+.log-in {
+  display: flex;
+  flex-direction: row;
+  font-family: 'OpenSans', sans-serif;
+  min-height: 550px;
+  background: #fff;
+
+  .title {
+    margin-bottom: 15px;
+
+    h1 {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 100;
+    }
+  }
+
+  .log-in-img {
+      width: 40%;
+      background: url(../img/img01.jpg) 60%;
+  }
+
+  .log-in-container {
+    width: 60%;
+    padding: 15% 25px;
+    position: relative;
+
+    .title-small {
+      position: absolute;
+      bottom: 20px;
+    }
+  }
 }

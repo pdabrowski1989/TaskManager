@@ -1,8 +1,28 @@
 .portlet {
   border: solid 1px @border-color;
-}
 
-.portlet-container {
-  padding: 20px;
-  background: @portlet-background;
+  .portlet-title {
+    color: #fff;
+    background: @sidebar-bg;
+    font-family: 'OpenSans', sans-serif;
+    font-weight: 300;
+    padding: 10px 20px;
+
+    h4 {
+      font-weight: 300;
+
+      .small {
+        font-size: 60%;
+      }
+    }
+
+    .small {
+      color: #fff;
+    }
+  }
+
+  .portlet-container {
+    padding: 20px;
+    background: @portlet-background;
+  }
 }

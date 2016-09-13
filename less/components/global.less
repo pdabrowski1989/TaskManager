@@ -12,7 +12,36 @@ body {
   padding-top: calc(2*@padding);
 }
 
+//== Margin
+.no-margin-b {
+  margin-bottom: 0;
+}
+
+.margin-b-l {
+  margin-bottom: calc(2*@margin);
+}
+
+.margin-t {
+  margin-top: @margin;
+}
+
 //== Fonts
-h1, h2, h3 {
+h1, h2, h3, h4 {
   margin: 0;
+}
+
+h1 {
+  font-size: 45px;
+}
+
+//== Useful
+.center-box {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.colored {
+  color: #2e6da4;
 }
