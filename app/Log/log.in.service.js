@@ -5,8 +5,8 @@ export default class LogInService {
         this.$http = $http;
     }
 
-    getUserData(user){
-        return this.$http.get('api/users/' + user);
+    postUser(user){
+        return this.$http.post('api/authenticate', user)
     }
 
 }

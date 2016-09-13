@@ -1,9 +1,11 @@
 'use strict';
 
 export default class SignInCtrl {
-    constructor(SignInService) {
+    constructor($rootScope, $state, SignInService) {
+        this.$rootScope = $rootScope;
+        this.$state = $state;
         this.signInService = SignInService;
-        this.
+        this.user = {};
 
         /////
 
@@ -11,8 +13,17 @@ export default class SignInCtrl {
     }
 
     createUser() {
-        this.signInService.postUser().then((data)=> {
-            console.log(data);
+        this.user = {
+            username: this.username,
+            password: this.password,
+            email: this.email
+        };
+
+        this.signInService.postUser(this.user).then((res)=> {
+            this.$rootScope.$emit('userCreated', res.data.success);
+            this.$state.go('log.in');
         }, (err) => console.log(err))
     }
 }
+
+SignInCtrl.$inject = ['$rootScope', '$state', 'SignInService'];

@@ -10,8 +10,8 @@ export default class SignInService {
     }
 
     postUser(user) {
-        this.$http('api/user').post(user);
+        return this.$http.post('api/user', user);
     }
 }
 
-SignInService.$inject = ['$http', '$q'];
+SignInService.$inject = ['$http'];

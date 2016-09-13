@@ -1,4 +1,5 @@
 <div class="center-box">
+    <div class="alert {{$ctrl.alert.cssClass}}" ng-if="$ctrl.showAlert">{{$ctrl.alert.message}}</div>
    <div class="log-in-wrapper">
        <div ng-if="$ctrl.showAlert" class="alert" ng-class="{'alert-danger': $ctrl.alertType === 0, 'alert-success': $ctrl.alertType === 1,}">
            {{$ctrl.alertDesc}}

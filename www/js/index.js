@@ -49,16 +49,16 @@
 	__webpack_require__(10);
 	__webpack_require__(5);
 	__webpack_require__(3);
-	__webpack_require__(18);
-	__webpack_require__(14);
 	__webpack_require__(9);
 	__webpack_require__(4);
+	__webpack_require__(19);
+	__webpack_require__(15);
+	__webpack_require__(18);
+	__webpack_require__(14);
 	__webpack_require__(20);
 	__webpack_require__(12);
 	__webpack_require__(7);
 	__webpack_require__(2);
-	__webpack_require__(19);
-	__webpack_require__(15);
 	__webpack_require__(17);
 	__webpack_require__(11);
 	__webpack_require__(6);
@@ -175,7 +175,7 @@
 	        template: '<in-component></in-component>'
 	    }).state('log.signin', {
 	        url: '/signin',
-	        template: '<sign-in-component></sign-in-component>'
+	        template: '<sign-in-component username="username" password="password" email="email"></sign-in-component>'
 	    });
 	}
 	
@@ -324,9 +324,9 @@
 	    }
 	
 	    _createClass(LogInService, [{
-	        key: 'getUserData',
-	        value: function getUserData(user) {
-	            return this.$http.get('api/users/' + user);
+	        key: 'postUser',
+	        value: function postUser(user) {
+	            return this.$http.post('api/authenticate', user);
 	        }
 	    }]);
 	
@@ -348,50 +348,35 @@
 	    value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var SignInService = function SignInService($http, $q, $rootScope) {
-	    _classCallCheck(this, SignInService);
+	var SignInService = function () {
+	    function SignInService($http) {
+	        _classCallCheck(this, SignInService);
 	
-	    var sService = this;
-	    var deferred = $q.defer();
-	    sService.createUser = createUser;
-	    sService.checkIfUsernameIsTaken = checkIfUsernameIsTaken;
-	    sService.isTaken = false;
+	        this.$http = $http;
 	
-	    //////
+	        //////
 	
-	    function checkIfUsernameIsTaken(username) {
-	        $http.get('/api/users/' + username).then(function (res) {
-	            if (res.data) {
-	                $rootScope.$apply(function () {
-	                    sService.isTaken = true;
-	                });
-	            } else {
-	                sService.isTaken = false;
-	            }
-	
-	            deferred.resolve(sService.isTaken);
-	        });
-	
-	        return deferred.promise;
+	        this.postUser = this.postUser.bind(this);
 	    }
 	
-	    function createUser(user) {
-	        sService.checkIfUsernameIsTaken(user.username).then(function () {
-	            console.log(sService.isTaken);
+	    _createClass(SignInService, [{
+	        key: 'postUser',
+	        value: function postUser(user) {
+	            return this.$http.post('api/user', user);
+	        }
+	    }]);
 	
-	            if (sService.isTaken === false) {
-	
-	                $http.post('/api/users', user).then(function (res) {
-	                    console.log(res.data);
-	                });
-	            }
-	        });
-	    }
-	};
+	    return SignInService;
+	}();
 	
 	exports.default = SignInService;
+	
+	
+	SignInService.$inject = ['$http'];
 
 /***/ },
 /* 9 */
@@ -598,6 +583,7 @@
 	
 	        this.version = $rootScope.version;
 	        this.$state = $state;
+	        this.showAlert = false;
 	        this.getUserData = LogInService.getUserData;
 	        this.logTitle = "Log <strong class='colored'>in.</strong>";
 	
@@ -606,6 +592,20 @@
 	        this.checkTitle = this.checkTitle.bind(this);
 	        $rootScope.$on('$viewContentLoaded', function () {
 	            return _this.checkTitle();
+	        });
+	        $rootScope.$on('userCreated', function (event, data) {
+	            _this.showAlert = true;
+	            if (data) {
+	                _this.alert = {
+	                    message: 'User created successfully',
+	                    cssClass: 'alert-success'
+	                };
+	            } else {
+	                _this.alert = {
+	                    message: 'Something went wrong',
+	                    cssClass: 'alert-danger'
+	                };
+	            }
 	        });
 	    }
 	
@@ -638,27 +638,51 @@
 	    value: true
 	});
 	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var SignInCtrl = function SignInCtrl(SignInService) {
-	    _classCallCheck(this, SignInCtrl);
+	var SignInCtrl = function () {
+	    function SignInCtrl($rootScope, $state, SignInService) {
+	        _classCallCheck(this, SignInCtrl);
 	
-	    var sCtrl = this;
-	    sCtrl.createUser = createUser;
-	    /////
+	        this.$rootScope = $rootScope;
+	        this.$state = $state;
+	        this.signInService = SignInService;
+	        this.user = {};
 	
-	    function createUser() {
-	        sCtrl.user = {
-	            username: sCtrl.username,
-	            password: sCtrl.password,
-	            email: sCtrl.email
-	        };
+	        /////
 	
-	        SignInService.createUser(sCtrl.user);
+	        this.createUser = this.createUser.bind(this);
 	    }
-	};
+	
+	    _createClass(SignInCtrl, [{
+	        key: 'createUser',
+	        value: function createUser() {
+	            var _this = this;
+	
+	            this.user = {
+	                username: this.username,
+	                password: this.password,
+	                email: this.email
+	            };
+	
+	            this.signInService.postUser(this.user).then(function (res) {
+	                _this.$rootScope.$emit('userCreated', res.data.success);
+	                _this.$state.go('log.in');
+	            }, function (err) {
+	                return console.log(err);
+	            });
+	        }
+	    }]);
+	
+	    return SignInCtrl;
+	}();
 	
 	exports.default = SignInCtrl;
+	
+	
+	SignInCtrl.$inject = ['$rootScope', '$state', 'SignInService'];
 
 /***/ },
 /* 14 */
@@ -816,7 +840,12 @@
 	});
 	var SignInComponent = exports.SignInComponent = {
 	    templateUrl: '../app/Log/SignIn/sign.in.template.html',
-	    controller: 'SignInCtrl'
+	    controller: 'SignInCtrl',
+	    bindings: {
+	        username: '<',
+	        password: '<',
+	        email: '<'
+	    }
 	};
 
 /***/ },

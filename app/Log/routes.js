@@ -12,7 +12,7 @@ export default function LogInConfig($stateProvider) {
         })
         .state('log.signin', {
             url: '/signin',
-            template: '<sign-in-component username="$ctrl.username" password="$ctrl.password" email="$ctrl.email"></sign-in-component>'
+            template: '<sign-in-component username="username" password="password" email="email"></sign-in-component>'
         });
  }
 
