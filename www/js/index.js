@@ -45,8 +45,6 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(19);
-	__webpack_require__(15);
 	__webpack_require__(16);
 	__webpack_require__(10);
 	__webpack_require__(5);
@@ -59,6 +57,8 @@
 	__webpack_require__(12);
 	__webpack_require__(7);
 	__webpack_require__(2);
+	__webpack_require__(19);
+	__webpack_require__(15);
 	__webpack_require__(17);
 	__webpack_require__(11);
 	__webpack_require__(6);
@@ -591,7 +591,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var LogInCtrl = function () {
-	    function LogInCtrl($watch, $state, $rootScope, LogInService) {
+	    function LogInCtrl($state, $rootScope, LogInService) {
 	        var _this = this;
 	
 	        _classCallCheck(this, LogInCtrl);
@@ -599,29 +599,22 @@
 	        this.version = $rootScope.version;
 	        this.$state = $state;
 	        this.getUserData = LogInService.getUserData;
-	        this.$watch('logTitle', function () {
-	            return _this.logTitle;
-	        });
+	        this.logTitle = "Log <strong class='colored'>in.</strong>";
 	
 	        ////
 	
 	        this.checkTitle = this.checkTitle.bind(this);
-	        $rootScope.$on('$stateChangeStart', function () {
+	        $rootScope.$on('$viewContentLoaded', function () {
 	            return _this.checkTitle();
 	        });
 	    }
 	
 	    _createClass(LogInCtrl, [{
-	        key: '$onInit',
-	        value: function $onInit() {
-	            this.checkTitle();
-	        }
-	    }, {
 	        key: 'checkTitle',
 	        value: function checkTitle() {
 	            if (this.$state.current.name === 'log.signin') {
 	                this.logTitle = "Sign <strong class='colored'>in.</strong>";
-	            } else {
+	            } else if (this.$state.current.name === 'log.in') {
 	                this.logTitle = "Log <strong class='colored'>in.</strong>";
 	            }
 	        }
@@ -633,7 +626,7 @@
 	exports.default = LogInCtrl;
 	
 	
-	LogInCtrl.$inject = ['$watch', '$state', '$rootScope', 'LogInService'];
+	LogInCtrl.$inject = ['$state', '$rootScope', 'LogInService'];
 
 /***/ },
 /* 13 */

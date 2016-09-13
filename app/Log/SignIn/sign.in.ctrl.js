@@ -2,18 +2,17 @@
 
 export default class SignInCtrl {
     constructor(SignInService) {
-        var sCtrl = this;
-        sCtrl.createUser = createUser;
+        this.signInService = SignInService;
+        this.
+
         /////
 
-        function createUser() {
-            sCtrl.user = {
-                username: sCtrl.username,
-                password: sCtrl.password,
-                email: sCtrl.email
-            };
+        this.createUser = this.createUser.bind(this);
+    }
 
-            SignInService.createUser(sCtrl.user)
-        }
+    createUser() {
+        this.signInService.postUser().then((data)=> {
+            console.log(data);
+        }, (err) => console.log(err))
     }
 }

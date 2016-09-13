@@ -1,42 +1,17 @@
 'use strict';
 
 export default class SignInService {
-    constructor($http, $q, $rootScope) {
-        var sService = this;
-        var deferred = $q.defer();
-        sService.createUser = createUser;
-        sService.checkIfUsernameIsTaken = checkIfUsernameIsTaken;
-        sService.isTaken = false;
+    constructor($http) {
+        this.$http = $http;
 
         //////
 
-        function checkIfUsernameIsTaken(username) {
-            $http.get('/api/users/' + username).then(function (res) {
-                if (res.data) {
-                    $rootScope.$apply(function () {
-                        sService.isTaken = true;
-                    });
-                } else {
-                    sService.isTaken = false;
-                }
+        this.postUser = this.postUser.bind(this);
+    }
 
-               deferred.resolve(sService.isTaken);
-            });
-
-            return deferred.promise;
-        }
-
-        function createUser(user) {
-            sService.checkIfUsernameIsTaken(user.username).then(function () {
-                console.log(sService.isTaken);
-
-                if (sService.isTaken === false) {
-
-                    $http.post('/api/users', user).then(function (res) {
-                        console.log(res.data)
-                    })
-                }
-            });
-        }
+    postUser(user) {
+        this.$http('api/user').post(user);
     }
 }
+
+SignInService.$inject = ['$http', '$q'];
