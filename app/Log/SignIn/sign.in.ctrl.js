@@ -20,8 +20,7 @@ export default class SignInCtrl {
         };
 
         this.signInService.postUser(this.user).then((res)=> {
-            this.$rootScope.$emit('userCreated', res.data.success);
-            this.$state.go('log.in');
+            this.$rootScope.$emit('userCreated', res.data.messageType);
         }, (err) => console.log(err))
     }
 }

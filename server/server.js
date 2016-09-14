@@ -76,18 +76,28 @@ router.get('/users', (req, res) => {
 });
 
 router.post('/user', (req, res) => {
-    User.create({
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email
+    User.findOne({
+        username: req.body.username
     }, (err, user) => {
-        if (err) console.log(err);
-        User.find((err, users) => {
-            if (err) res.send(err);
-            res.json({
-                success: true
-            });
-        })
+        if (err) res.json({messageType: 1, error: err});
+        if(!user)   {
+            User.create({
+                username: req.body.username,
+                password: req.body.password,
+                email: req.body.email
+            }, (err, user) => {
+                if (err) {
+                    res.json({messageType: 1, error: err});
+                } else {
+                    User.find((err, users) => {
+                        if (err) res.send(err);
+                        res.json({messageType: 0});
+                    })
+                }
+            })
+        } else {
+            res.json({messageType: 2});
+        }
     })
 });
 

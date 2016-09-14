@@ -3,7 +3,7 @@
 export default class MainCtrl {
     constructor($rootScope) {
         this.$rootScope = $rootScope;
-        this.$rootScope.version = '1.0.0'
+        this.$rootScope.version = '1.0.0';
     }
 }
 

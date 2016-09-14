@@ -45,27 +45,27 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(16);
-	__webpack_require__(10);
-	__webpack_require__(5);
-	__webpack_require__(3);
-	__webpack_require__(9);
-	__webpack_require__(4);
 	__webpack_require__(19);
 	__webpack_require__(15);
 	__webpack_require__(18);
 	__webpack_require__(14);
+	__webpack_require__(16);
+	__webpack_require__(10);
+	__webpack_require__(5);
+	__webpack_require__(3);
 	__webpack_require__(20);
 	__webpack_require__(12);
 	__webpack_require__(7);
 	__webpack_require__(2);
+	__webpack_require__(9);
+	__webpack_require__(4);
 	__webpack_require__(17);
 	__webpack_require__(11);
 	__webpack_require__(6);
-	__webpack_require__(23);
 	__webpack_require__(22);
 	__webpack_require__(13);
-	module.exports = __webpack_require__(8);
+	__webpack_require__(8);
+	module.exports = __webpack_require__(23);
 
 
 /***/ },
@@ -583,29 +583,20 @@
 	
 	        this.version = $rootScope.version;
 	        this.$state = $state;
+	        this.alert = {};
 	        this.showAlert = false;
 	        this.getUserData = LogInService.getUserData;
 	        this.logTitle = "Log <strong class='colored'>in.</strong>";
 	
 	        ////
 	
+	        this.messageDisplay = this.messageDisplay.bind(this);
 	        this.checkTitle = this.checkTitle.bind(this);
 	        $rootScope.$on('$viewContentLoaded', function () {
 	            return _this.checkTitle();
 	        });
 	        $rootScope.$on('userCreated', function (event, data) {
-	            _this.showAlert = true;
-	            if (data) {
-	                _this.alert = {
-	                    message: 'User created successfully',
-	                    cssClass: 'alert-success'
-	                };
-	            } else {
-	                _this.alert = {
-	                    message: 'Something went wrong',
-	                    cssClass: 'alert-danger'
-	                };
-	            }
+	            return _this.messageDisplay(data);
 	        });
 	    }
 	
@@ -616,6 +607,35 @@
 	                this.logTitle = "Sign <strong class='colored'>in.</strong>";
 	            } else if (this.$state.current.name === 'log.in') {
 	                this.logTitle = "Log <strong class='colored'>in.</strong>";
+	            }
+	        }
+	    }, {
+	        key: 'messageDisplay',
+	        value: function messageDisplay(type) {
+	            this.showAlert = true;
+	            console.log(type);
+	
+	            switch (type) {
+	                case 0:
+	                    this.alert = {
+	                        message: 'User created successfully.',
+	                        cssClass: 'alert-success'
+	                    };
+	                    this.$state.go('log.in');
+	                    break;
+	                case 1:
+	                    this.alert = {
+	                        message: 'Something went wrong.',
+	                        cssClass: 'alert-danger'
+	                    };
+	                    this.$state.go('log.in');
+	                    break;
+	                case 2:
+	                    this.alert = {
+	                        message: 'This username is taken.',
+	                        cssClass: 'alert-warning'
+	                    };
+	                    break;
 	            }
 	        }
 	    }]);
@@ -668,8 +688,7 @@
 	            };
 	
 	            this.signInService.postUser(this.user).then(function (res) {
-	                _this.$rootScope.$emit('userCreated', res.data.success);
-	                _this.$state.go('log.in');
+	                _this.$rootScope.$emit('userCreated', res.data.messageType);
 	            }, function (err) {
 	                return console.log(err);
 	            });
